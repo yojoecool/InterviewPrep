@@ -29,6 +29,15 @@ class Duplicates:
         we return False at the end after we've made it through the entire list without
         finding a duplicate.
         """
+
+        """
+        Alt Solution:
+        dupSet = set(nums)
+        return len(dupSet) != len(nums)
+
+        Smaller code, but time complexity should be the same O(n) as solution below
+        """
+
         dupSet = set()
 
         for num in nums:
