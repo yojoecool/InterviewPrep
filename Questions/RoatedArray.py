@@ -43,7 +43,7 @@ class RotatedArray:
             return self.minBSearch(nums[:mid + 1])
         return self.minBSearch(nums[mid:])
 
-    def findBSearch(self, nums, target, start = 0):
+    def binarySearch(self, nums, target, start = 0):
         """
         :type nums: List[int]
         :rtype: int
@@ -61,15 +61,15 @@ class RotatedArray:
 
         if first < last:
             if nums[mid] < target:
-                return self.findBSearch(nums[mid + 1:], target, mid + start + 1)
-            return self.findBSearch(nums[:mid], target, start)
+                return self.binarySearch(nums[mid + 1:], target, mid + start + 1)
+            return self.binarySearch(nums[:mid], target, start)
 
         if first <= nums[mid]:
             if first <= target < nums[mid]:
-                return self.findBSearch(nums[:mid], target, start)
-            return self.findBSearch(nums[mid + 1:], target, start + mid + 1)
+                return self.binarySearch(nums[:mid], target, start)
+            return self.binarySearch(nums[mid + 1:], target, start + mid + 1)
 
         if nums[mid] < target <= last:
-            return self.findBSearch(nums[mid + 1:], target, start + mid + 1)
-        return self.findBSearch(nums[:mid], target, start)
+            return self.binarySearch(nums[mid + 1:], target, start + mid + 1)
+        return self.binarySearch(nums[:mid], target, start)
 
