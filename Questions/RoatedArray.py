@@ -1,5 +1,7 @@
 import sys
-
+"""
+Rotated Array Problems
+"""
 class RotatedArray:
     def minSplit(self, nums):
         """
