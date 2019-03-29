@@ -17,3 +17,17 @@ class MergeSort:
         secondHalf = self.sort(array[mid:])
 
         return self.merge(firstHalf, secondHalf)
+
+    def sort_three_way(self, array):
+        if len(array) <= 1: return array
+
+        third = len(array) // 3
+        second_third = (len(array) * 2) // 3
+
+        firstThird = self.sort_three_way(array[:third])
+        secondThird = self.sort_three_way(array[third:second_third])
+        lastThird = self.sort_three_way(array[second_third:])
+
+        firstMerged = self.merge(firstThird, secondThird)
+
+        return self.merge(firstMerged, lastThird)
