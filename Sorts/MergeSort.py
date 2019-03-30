@@ -15,7 +15,7 @@ class MergeSort:
 
         firstHalf = self.sort(array[:mid])
         secondHalf = self.sort(array[mid:])
-
+ 
         return self.merge(firstHalf, secondHalf)
 
     def sort_three_way(self, array):
