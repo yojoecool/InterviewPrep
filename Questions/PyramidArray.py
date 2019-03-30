@@ -1,3 +1,13 @@
+"""
+A Pyramid List (ex. [1, 2, 3, 4, 3, 1]) is a list with at least 3 elements,
+a single peak value, and a strictly increasing sequence of at least one element
+to the left of the peak and a strictly decreasing sequence of at least one element
+to the right of the peak.
+
+a. Find the minimum value in the Pyramid List.
+b. Return the all of the elements in the Pyramid List in strictly increasing order.
+c. Return the index of the peak value.
+"""
 class PyramidArray:
     def minValue(self, arr):
         first = arr[0]
@@ -43,4 +53,4 @@ class PyramidArray:
                 answer.append(arr[secondHalf])
                 secondHalf -= 1
 
-        return answer + arr[firstHalf:split] + arr[split:secondHalf][::-1]
+        return answer + arr[firstHalf:split] + arr[secondHalf:split - 1:-1]
