@@ -1,3 +1,5 @@
+import sys
+
 class TreeNode:
     def __init__(self, val, left = None, right = None):
         self.left = left
@@ -72,10 +74,11 @@ class Tree:
             return (True, None, None)
 
         leftTree = self.bstHelperVars(root.left)
-        rightTree = self.bstHelperVars(root.right)
-
-        if leftTree[0] == False or rightTree[0] == False:
+        if leftTree[0] == False:
             return (False, 0, 0)
+        rightTree = self.bstHelperVars(root.right)
+        if rightTree[0] == False:
+            return (False, 0, 0,)
 
         if (leftTree[1] != None and root.val <= leftTree[1]) \
                 or (rightTree[2] != None and root.val >= rightTree[2]):
@@ -84,31 +87,23 @@ class Tree:
         maxVal = 0
         minVal = 0
 
-        validLeftMin = leftTree[2] != None
-        validRightMin = rightTree[2] != None
+        leftMax = leftTree[1]
+        rightMax = rightTree[1]
+        if leftMax is None:
+            leftMax = -sys.maxsize - 1
+        if rightMax is None:
+            rightMax = -sys.maxsize - 1
 
-        validLeftMax = leftTree[1] != None
-        validRightMax = rightTree[1] != None
+        leftMin = leftTree[2]
+        rightMin = rightTree[2]
+        if leftMin is None:
+            leftMin = sys.maxsize
+        if rightMin is None:
+            rightMin = sys.maxsize
 
-        if not validLeftMax and not validRightMax:
-            maxVal = root.val
-        else:
-            if not validLeftMax and validRightMax:
-                maxVal = max(root.val, rightTree[1])
-            elif validLeftMax and not validRightMax:
-                maxVal = max(root.val, leftTree[1])
-            else:
-                maxVal = max(root.val, leftTree[1], rightTree[1])
+        maxVal = max([root.val, leftMax, rightMax])
+        minVal = min([root.val, leftMin, rightMin])
 
-        if not validLeftMin and not validRightMin:
-            minVal = root.val
-        else:
-            if not validLeftMin and validRightMin:
-                minVal = min(root.val, rightTree[2])
-            elif validLeftMin and not validRightMin:
-                minVal = min(root.val, leftTree[2])
-            else:
-                minVal = min(root.val, leftTree[2], rightTree[2])
         return (True, maxVal, minVal)
 
     def isValidBST(self, root):
