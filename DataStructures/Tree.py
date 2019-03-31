@@ -65,6 +65,18 @@ class Tree:
         returnArray = [root.val] + leftTree[1] + rightTree[1]
         return (True, returnArray)
 
+    def bstHelperBFS(self, root, min, max):
+        if root is None:
+            return True
+
+        if min is not None and root.val <= min:
+            return False
+        if max is not None and root.val >= max:
+            return False
+
+        return self.bstHelperBFS(root.left, min, root.val) \
+            and self.bstHelperBFS(root.right, root.val, max)
+
     def bstHelperVars(self, root):
         """
         :type root: TreeNode
