@@ -14,3 +14,15 @@ class BitWise:
             n /= 2
 
         return count
+
+    def reverseBits(self, n):
+        answer = 0
+        bitCount = 0
+        while bitCount < 32:
+            leftOver = n % 2
+            n >>= 1
+            answer <<= 1
+            answer += leftOver
+            bitCount += 1
+
+        return answer
