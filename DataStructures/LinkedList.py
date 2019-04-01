@@ -62,7 +62,7 @@ class LinkedList:
         :rtype: ListNode
         """
         if self.head == None or self.head.next == None:
-            return head
+            return self.head
 
         slow = self.head
         fast = self.head
