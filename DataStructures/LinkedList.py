@@ -72,7 +72,6 @@ class LinkedList:
             fast = fast.next.next
             
         return slow
-
     
     def hasCycle(self):
         """
@@ -92,3 +91,39 @@ class LinkedList:
                 return True
             
         return False
+    
+    """
+    Get node at the start of the cycle.
+    Use Floyd's algorithm (tortoise and hare) + math
+    
+    Explanation of algorithm: https://www.geeksforgeeks.org/find-first-node-of-loop-in-a-linked-list/
+    """
+    def detectCycle(self):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        if self.head == None or self.head.next == None:
+            return None
+        
+        slow = self.head
+        fast = self.head
+        
+        found = False
+        
+        while fast != None and fast.next != None and not found:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                found = True
+                
+        if not found:
+            return None
+        
+        slow = self.head
+        
+        while slow != fast:
+            slow = slow.next
+            fast = fast.next
+            
+        return slow
