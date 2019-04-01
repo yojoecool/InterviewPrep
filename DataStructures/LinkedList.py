@@ -55,3 +55,20 @@ class LinkedList:
         while temp != None:
             print(temp.value)
             temp = temp.next
+    
+    def middleNode(self):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        if self.head == None or self.head.next == None:
+            return head
+
+        slow = self.head
+        fast = self.head
+        
+        while fast != None and fast.next != None:
+            slow = slow.next
+            fast = fast.next.next
+            
+        return slow
