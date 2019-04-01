@@ -10,7 +10,7 @@ class RotatedArray:
         """
         length = len(nums)
         if length == 0:
-            return -sys.maxsize - 1
+            return sys.maxsize
         if length == 1:
             return nums[0]
 

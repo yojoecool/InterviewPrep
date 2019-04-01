@@ -26,3 +26,15 @@ class BitWise:
             bitCount += 1
 
         return answer
+
+    def decToBin(self, n):
+        if n == 0:
+            return "0"
+
+        answer = ""
+        while n != 0:
+            nextBit = n % 2
+            answer = str(nextBit) + answer
+            n //= 2
+
+        return answer
