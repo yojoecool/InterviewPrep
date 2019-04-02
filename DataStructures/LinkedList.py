@@ -1,11 +1,91 @@
 class Node:
-    def __init__(self, value, next):
+    def __init__(self, value, next = None):
         self.value = value
         self.next = next
 
+
 class LinkedList:
-    def __init__(self, head):
-        self.head = head
+    def __init__(self, arr):
+        if len(arr) == 0:
+            self.head = None
+        else:
+            self.head = Node(arr[0])
+            temp = self.head
+            for num in arr[1:]:
+                temp.next = Node(num)
+                temp = temp.next
+
+    """
+    Assumption: range start - finish exist in linked list
+    """
+    def reverseRangeBridges(self, start, finish):
+        if not self.head or not self.head.next:
+            return self.head
+
+        if start == 0:
+            before = None
+            prev = None
+            curr = self.head
+            next = curr.next
+        else:
+            before = self.head
+            for _ in range(start - 1):
+                before = before.next
+
+            prev = before
+            curr = before.next
+            next = curr.next
+
+        firstNode = curr
+        
+        for _ in range(start, finish + 1):
+            curr.next = prev
+            prev = curr
+            curr = next
+            if next:
+                next = next.next
+        
+        firstNode.next = curr
+        if before:
+            before.next = prev
+        else:
+            self.head = prev
+
+        self.print()
+
+    # time complexity O(n)
+    # space complexity O(n)
+    def reverseRangeVivian(self, start, finish):
+        if (self.head == None or self.head.next == None):
+            return self.head
+        counter = 0
+        stack = []
+        temp = self.head
+        is_start = False
+        while (counter < start - 1):
+            temp = temp.next
+            counter += 1
+        begin = temp
+        if (counter == start):
+            stack.append(temp)
+            is_start = True
+        temp = temp.next
+        counter += 1
+        while (counter <= finish):
+            stack.append(temp)
+            temp = temp.next
+            counter += 1
+        end = temp
+        while (len(stack) > 0):
+            if (is_start):
+                self.head = stack.pop()
+                begin = self.head
+                is_start = False
+            else:
+                begin.next = stack.pop()
+                begin = begin.next
+        begin.next = end
+        return self.head
 
     def reverseWithStack(self):
         if self.head == None or self.head.next == None:
