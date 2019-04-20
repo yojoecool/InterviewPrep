@@ -46,3 +46,64 @@ class Duplicates:
             dupSet.add(num)
 
         return False
+
+    """
+    Given an array of integers, 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.
+
+    Find all the elements that appear twice in this array.
+
+    Could you do it without extra space and in O(n) runtime?
+
+    Example:
+    Input:
+    [4,3,2,7,8,2,3,1]
+
+    Output:
+    [2,3]
+    """
+    def findDuplicates(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        ans = []
+        for i in range(len(nums)):
+            index = abs(nums[i]) - 1
+            if nums[index] < 0:
+                ans.append(abs(nums[i]))
+            else:
+                nums[index] = abs(nums[index]) * -1
+
+        return ans
+        
+    """
+    Given an array of integers where 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.
+
+    Find all the elements of [1, n] inclusive that do not appear in this array.
+
+    Could you do it without extra space and in O(n) runtime? You may assume the returned list does not count as extra space.
+
+    Example:
+
+    Input:
+    [4,3,2,7,8,2,3,1]
+
+    Output:
+    [5,6]
+    """
+    def findDisappearedNumbers(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        ans = []
+
+        for i in range(len(nums)):
+            index = abs(nums[i]) - 1
+            nums[index] = -1 * abs(nums[index])
+
+        for i in range(len(nums)):
+            if nums[i] > 0:
+                ans.append(i + 1)
+
+        return ans

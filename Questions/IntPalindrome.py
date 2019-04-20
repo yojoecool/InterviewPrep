@@ -6,10 +6,10 @@ class IntPalindrome:
         :type x: int
         :rtype: bool
         """
-        if x == 0:
-            return True
         if x < 0:
             return False
+        if x < 10:
+            return True
 
         compare = 0
         temp = x
@@ -18,7 +18,24 @@ class IntPalindrome:
         while tens >= 0:
             compare += (10**tens) * (temp % 10)
             tens -= 1
-            temp /= 10
+            temp //= 10
+
+        return int(compare) == x
+
+    def isPalindromeAlt(self, x):
+        if x < 0:
+            return False
+        if x < 10:
+            return True
+
+        compare = 0
+        temp = x
+        tens = 0
+
+        while temp > 0:
+            compare += (10**tens) * (temp % 10)
+            tens += 1
+            temp //= 10
 
         return int(compare) == x
 
