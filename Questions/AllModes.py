@@ -1,4 +1,7 @@
 class AllModes:
+    """
+    Return list of modes in array
+    """
     def returnAll(self, arr):
         if len(arr) == 0:
             return None
@@ -23,6 +26,9 @@ class AllModes:
 
         return answer
 
+    """
+    Return singular mode when gauranteed to 
+    """
     def oneMode(self, arr):
         if len(arr) == 0:
             return None
