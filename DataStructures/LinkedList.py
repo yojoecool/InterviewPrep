@@ -37,14 +37,14 @@ class LinkedList:
             next = curr.next
 
         firstNode = curr
-        
+
         for _ in range(start, finish + 1):
             curr.next = prev
             prev = curr
             curr = next
             if next:
                 next = next.next
-        
+
         firstNode.next = curr
         if before:
             before.next = prev
@@ -104,7 +104,7 @@ class LinkedList:
         while len(allNodes) > 0:
             start.next = allNodes.pop()
             start = start.next
-        
+
         start.next = None
 
         self.print()
@@ -135,7 +135,7 @@ class LinkedList:
         while temp != None:
             print(temp.value)
             temp = temp.next
-    
+
     def middleNode(self):
         """
         :type head: ListNode
@@ -146,13 +146,13 @@ class LinkedList:
 
         slow = self.head
         fast = self.head
-        
+
         while fast != None and fast.next != None:
             slow = slow.next
             fast = fast.next.next
-            
+
         return slow
-    
+
     def hasCycle(self):
         """
         :type head: ListNode
@@ -160,22 +160,22 @@ class LinkedList:
         """
         if self.head == None or self.head.next == None:
             return False
-        
+
         slow = self.head
         fast = self.head
-        
+
         while fast != None and fast.next != None:
             slow = slow.next
             fast = fast.next.next
             if slow == fast:
                 return True
-            
+
         return False
-    
+
     """
     Get node at the start of the cycle.
     Use Floyd's algorithm (tortoise and hare) + math
-    
+
     Explanation of algorithm: https://www.geeksforgeeks.org/find-first-node-of-loop-in-a-linked-list/
     """
     def detectCycle(self):
@@ -185,27 +185,27 @@ class LinkedList:
         """
         if self.head == None or self.head.next == None:
             return None
-        
+
         slow = self.head
         fast = self.head
-        
+
         found = False
-        
+
         while fast != None and fast.next != None and not found:
             slow = slow.next
             fast = fast.next.next
             if slow == fast:
                 found = True
-                
+
         if not found:
             return None
-        
+
         slow = self.head
-        
+
         while slow != fast:
             slow = slow.next
             fast = fast.next
-            
+
         return slow
 
     """
@@ -218,19 +218,19 @@ class LinkedList:
 
     Example 1:
 
-    Input: 
+    Input:
     head: 0->1->2->3
     G = [0, 1, 3]
     Output: 2
-    Explanation: 
+    Explanation:
     0 and 1 are connected, so [0, 1] and [3] are the two connected components.
     Example 2:
 
-    Input: 
+    Input:
     head: 0->1->2->3->4
     G = [0, 3, 1, 4]
     Output: 2
-    Explanation: 
+    Explanation:
     0 and 1 are connected, 3 and 4 are connected, so [0, 1] and [3, 4] are the two connected components.
     """
     def numComponents(self, G):
@@ -240,19 +240,18 @@ class LinkedList:
         :rtype: int
         """
         x = set(G)
-        currBuild = 0
+        currBuild = False
 
         components = 0
         head = self.head
 
         while head:
-            if head.val in x:
-                x.remove(head.val)
-                currBuild += 1
+            if head.value in x:
+                currBuild = True
             else:
                 if currBuild > 0:
                     components += 1
-                currBuild = 0
+                currBuild = False
             head = head.next
 
         if currBuild:
